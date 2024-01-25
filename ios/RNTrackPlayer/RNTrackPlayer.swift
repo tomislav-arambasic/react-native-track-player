@@ -761,6 +761,7 @@ public class RNTrackPlayer: RCTEventEmitter, AudioSessionControllerDelegate {
         if (rejectWhenNotInitialized(reject: reject)) { return }
 
         Metadata.update(for: player, with: metadata)
+        emit(event: EventType.NowPlayingMetadataChanged, body: metadata)
         resolve(NSNull())
     }
 

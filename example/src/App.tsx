@@ -13,7 +13,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import TrackPlayer, { useActiveTrack } from 'react-native-track-player';
+import TrackPlayer, { useActiveTrack, useMetadata } from 'react-native-track-player';
 
 import {
   Button,
@@ -40,6 +40,9 @@ export default function App() {
 const Inner: React.FC = () => {
   const track = useActiveTrack();
   const isPlayerReady = useSetupPlayer();
+  const metadata = useMetadata();
+
+  console.log("metadata---", metadata)
 
   // options bottom sheet
   const optionsSheetRef = useRef<BottomSheet>(null);
@@ -154,7 +157,11 @@ function useSetupPlayer() {
       const queue = await TrackPlayer.getQueue();
       if (unmounted) return;
       if (queue.length <= 0) {
-        await QueueInitialTracksService();
+        // await QueueInitialTracksService();
+        await TrackPlayer.add([{
+          isLiveStream: true,
+          url: "https://icecast.streammyflr.org/FLRstream"
+        }])
       }
     })();
     return () => {

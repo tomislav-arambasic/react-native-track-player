@@ -21,6 +21,7 @@ enum EventType: String, CaseIterable {
     case PlaybackState = "playback-state"
     case PlaybackProgressUpdated = "playback-progress-updated"
     case PlaybackPlayWhenReadyChanged = "playback-play-when-ready-changed"
+    case NowPlayingMetadataChanged = "now-playing-metadata-changed"
     case SleepTimerChanged = "sleep-timer-changed"
     case SleepTimerComplete = "sleep-timer-complete"
     case MetadataChapterReceived = "metadata-chapter-received"
