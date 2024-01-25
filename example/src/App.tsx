@@ -13,7 +13,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import TrackPlayer, { useActiveTrack, useMetadata } from 'react-native-track-player';
+import TrackPlayer, { useActiveTrack, useNowPlayingMetadata } from 'react-native-track-player';
 
 import {
   Button,
@@ -40,7 +40,7 @@ export default function App() {
 const Inner: React.FC = () => {
   const track = useActiveTrack();
   const isPlayerReady = useSetupPlayer();
-  const metadata = useMetadata();
+  const metadata = useNowPlayingMetadata();
 
   console.log("metadata---", metadata)
 
