@@ -431,9 +431,42 @@ class MusicService : HeadlessJsTaskService() {
         player.replaceItem(index, track.toAudioItem())
     }
 
+    private fun extractArtistAndSong(input: String?): Pair<String, String>? {
+      if (input.isNullOrBlank()) {
+          return null
+      }
+
+      val parts = input.split(" - ")
+
+      if (parts.size == 2) {
+          val songName = parts[0].trim()
+          val artist = parts[1].trim()
+          return Pair(artist, songName)
+      }
+
+      return null
+    }
+
     @MainThread
     fun updateNowPlayingMetadata(track: Track) {
         player.notificationManager.overrideMetadata(track.toAudioItem())
+
+        val result = extractArtistAndSong(track.artist)
+
+        if (result != null) {
+          val (artist, songName) = result
+          val bundle = Bundle()
+          Bundle().apply {
+              putString("title", songName)
+              putString("artist", artist)
+              putString("album", track.album)
+              putString("date", track.date)
+              putString("genre", track.genre)
+              emit(MusicEvents.NOW_PLAYING_METADATA_CHANGED, this)
+          }
+        } else {
+            println("Invalid format")
+        }
     }
 
     @MainThread
