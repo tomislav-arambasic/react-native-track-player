@@ -510,3 +510,10 @@ export async function getRepeatMode(): Promise<RepeatMode> {
 export async function retry() {
   return TrackPlayer.retry();
 }
+
+/**
+ * Gets the now playing metadata.
+ */
+export async function getNowPlayingMetadata(): Promise<TrackMetadataBase | undefined> {
+  return (await TrackPlayer.getNowPlayingMetadata()) ?? undefined;
+}

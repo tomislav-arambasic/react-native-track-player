@@ -12,21 +12,8 @@ export const useNowPlayingMetadata = (): TrackMetadataBase | undefined => {
   const [metadata, setMetadata] = useState<TrackMetadataBase | undefined>();
 
   useEffect(() => {
-    TrackPlayer.getActiveTrack()
-    .then(activeTrack => {
-      setMetadata({
-        artist: activeTrack?.artist,
-        title: activeTrack?.title,
-        artwork: activeTrack?.artwork,
-        album:activeTrack?.album,
-        date:activeTrack?.date,
-        description:activeTrack?.description,
-        duration:activeTrack?.duration,
-        genre:activeTrack?.genre,
-        isLiveStream:activeTrack?.isLiveStream,
-        rating:activeTrack?.rating,
-      })
-    })
+    TrackPlayer.getNowPlayingMetadata()
+    .then(setMetadata)
   }, [])
 
   useTrackPlayerEvents(
