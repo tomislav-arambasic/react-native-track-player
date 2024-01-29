@@ -364,8 +364,10 @@ class MusicModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
     }
 
     @ReactMethod
-    fun getNowPlayingMetadata() = scope.launch {
-        return musicService.getNowPlayingMetadata()
+    fun getNowPlayingMetadata(callback: Promise) = scope.launch {
+      if (verifyServiceBoundOrReject(callback)) return@launch
+
+      callback.resolve(musicService.getNowPlayingMetadata())
     }
 
     @ReactMethod
