@@ -281,6 +281,13 @@ export function updateNowPlayingMetadata(
   });
 }
 
+/**
+ * Gets the metadata content of the notification (Android) and the Now Playing Center (iOS).
+ */
+export async function getNowPlayingMetadata(): Promise<TrackMetadataBase | undefined> {
+  return (await TrackPlayer.getNowPlayingMetadata()) ?? undefined;
+}
+
 // MARK: - Player API
 
 /**
@@ -509,11 +516,4 @@ export async function getRepeatMode(): Promise<RepeatMode> {
  */
 export async function retry() {
   return TrackPlayer.retry();
-}
-
-/**
- * Gets the now playing metadata.
- */
-export async function getNowPlayingMetadata(): Promise<TrackMetadataBase | undefined> {
-  return (await TrackPlayer.getNowPlayingMetadata()) ?? undefined;
 }
