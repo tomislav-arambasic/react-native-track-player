@@ -440,7 +440,6 @@ class MusicService : HeadlessJsTaskService() {
 
         val eventPayload = Bundle()
         eventPayload.putBundle("metadata", nowPlayingMetadata!!.clone() as Bundle)
-        eventPayload.putString("event", MusicEvents.NOW_PLAYING_METADATA_CHANGED)
 
         emit(MusicEvents.NOW_PLAYING_METADATA_CHANGED, eventPayload);
     }
