@@ -4,8 +4,6 @@ import { useTrackPlayerEvents } from './useTrackPlayerEvents';
 import { NowPlayingMetadata } from '../interfaces';
 import TrackPlayer from '..';
 
-
-
 export const useNowPlayingMetadata = (): NowPlayingMetadata | undefined => {
   const [metadata, setMetadata] = useState<NowPlayingMetadata | undefined>();
 
@@ -28,7 +26,6 @@ export const useNowPlayingMetadata = (): NowPlayingMetadata | undefined => {
   useTrackPlayerEvents(
     [Event.NowPlayingMetadataChanged],
     async (event) => {
-      console.log("event---", event)
       setMetadata(event.metadata);
     }
   );
