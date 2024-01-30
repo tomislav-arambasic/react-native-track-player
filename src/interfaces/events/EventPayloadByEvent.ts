@@ -19,7 +19,7 @@ import type { RemotePlaySearchEvent } from './RemotePlaySearchEvent';
 import type { RemoteSeekEvent } from './RemoteSeekEvent';
 import type { RemoteSetRatingEvent } from './RemoteSetRatingEvent';
 import type { RemoteSkipEvent } from './RemoteSkipEvent';
-import { NowPlayingMetadataChangedEvent } from './NowPlayingMetadataChangedEvent';
+import type { NowPlayingMetadataChangedEvent } from './NowPlayingMetadataChangedEvent';
 
 export type EventPayloadByEvent = {
   [Event.PlayerError]: PlayerErrorEvent;

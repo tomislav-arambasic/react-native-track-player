@@ -1,4 +1,4 @@
-import { NowPlayingMetadata } from "../NowPlayingMetadata";
+import type { NowPlayingMetadata } from "../NowPlayingMetadata";
 
 export interface NowPlayingMetadataChangedEvent {
   metadata: NowPlayingMetadata;
