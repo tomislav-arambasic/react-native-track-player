@@ -39,7 +39,6 @@ import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 import timber.log.Timber
-import android.util.Log
 
 @MainThread
 class MusicService : HeadlessJsTaskService() {
@@ -438,16 +437,16 @@ class MusicService : HeadlessJsTaskService() {
         player.notificationManager.overrideMetadata(track.toAudioItem())
         
         nowPlayingMetadata = track.originalItem
-        emit(MusicEvents.NOW_PLAYING_METADATA_CHANGED, track.originalItem)
-        Log.d("myTag------", "This is a message")
-        Log.d("myTag------", track.toString())
-        Log.d("kolko---", nowPlayingMetadata.toString())
+
+        val eventPayload = Bundle()
+        eventPayload.putBundle("metadata", nowPlayingMetadata!!.clone() as Bundle)
+        eventPayload.putString("event", MusicEvents.NOW_PLAYING_METADATA_CHANGED)
+
+        emit(MusicEvents.NOW_PLAYING_METADATA_CHANGED, eventPayload);
     }
 
     @MainThread
     fun getNowPlayingMetadata(): Bundle {
-      Log.d("RADI------", "This is a message")
-      Log.d("RADI------", nowPlayingMetadata.toString())
         return nowPlayingMetadata ?: Bundle()
     }
 

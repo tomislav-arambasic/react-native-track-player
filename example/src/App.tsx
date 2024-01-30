@@ -40,16 +40,10 @@ export default function App() {
 const Inner: React.FC = () => {
   const track = useActiveTrack();
   const isPlayerReady = useSetupPlayer();
-  // const metadata = useNowPlayingMetadata();
+  const metadata = useNowPlayingMetadata();
 
-  // console.log("metadata---", metadata)
+  console.log(metadata)
 
-  useEffect(() => {
-    setTimeout(() => {
-      console.log("zovem-----")
-      TrackPlayer.getNowPlayingMetadata().then(res => console.log("res----", res)).catch(e => console.log("opet error----", e))
-    }, 5000);
-  }, [])
 
   // options bottom sheet
   const optionsSheetRef = useRef<BottomSheet>(null);

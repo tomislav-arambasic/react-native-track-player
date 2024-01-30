@@ -13,14 +13,15 @@ export const useNowPlayingMetadata = (): NowPlayingMetadata | undefined => {
 
   useEffect(() => {
     let unmounted = false;
-    console.log('----INIT--123---')
+
+    if (unmounted) return;
+
     TrackPlayer.getNowPlayingMetadata()
-    .then(res => 
-      {
-        console.log('promise')
-        if (unmounted) return;
-        console.log('----INIT--23424234---'); setMetadata(res); console.log("INIT-----", res)
-      }).catch(e => console.log("ERROR-----",e))
+    .then()
+      .catch(() => {
+        /** Only throws while you haven't yet setup, ignore failure. */
+      });
+
       return () => {
         unmounted = true;
       };
@@ -29,7 +30,6 @@ export const useNowPlayingMetadata = (): NowPlayingMetadata | undefined => {
   useTrackPlayerEvents(
     [Event.NowPlayingMetadataChanged],
     async (event) => {
-      console.log("EVENT---", metadata)
       setMetadata(event.metadata);
     }
   );
