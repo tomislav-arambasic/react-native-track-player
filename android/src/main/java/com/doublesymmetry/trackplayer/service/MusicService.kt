@@ -39,6 +39,7 @@ import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 import timber.log.Timber
+import android.util.Log
 
 @MainThread
 class MusicService : HeadlessJsTaskService() {
@@ -46,7 +47,7 @@ class MusicService : HeadlessJsTaskService() {
     private val binder = MusicBinder()
     private val scope = MainScope()
     private var progressUpdateJob: Job? = null
-    private var nowPlayingMetadata: Bundle? = null
+    private var nowPlayingMetadata: Bundle? = Bundle()
 
     /**
      * Use [appKilledPlaybackBehavior] instead.
@@ -438,10 +439,15 @@ class MusicService : HeadlessJsTaskService() {
         
         nowPlayingMetadata = track.originalItem
         emit(MusicEvents.NOW_PLAYING_METADATA_CHANGED, track.originalItem)
+        Log.d("myTag------", "This is a message")
+        Log.d("myTag------", track.toString())
+        Log.d("kolko---", nowPlayingMetadata.toString())
     }
 
     @MainThread
     fun getNowPlayingMetadata(): Bundle {
+      Log.d("RADI------", "This is a message")
+      Log.d("RADI------", nowPlayingMetadata.toString())
         return nowPlayingMetadata ?: Bundle()
     }
 

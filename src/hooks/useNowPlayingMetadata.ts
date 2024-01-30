@@ -12,9 +12,18 @@ export const useNowPlayingMetadata = (): NowPlayingMetadata | undefined => {
   const [metadata, setMetadata] = useState<NowPlayingMetadata | undefined>();
 
   useEffect(() => {
+    let unmounted = false;
     console.log('----INIT--123---')
     TrackPlayer.getNowPlayingMetadata()
-    .then(res => {console.log('----INIT--23424234---'); setMetadata(res); console.log("INIT-----", res)})
+    .then(res => 
+      {
+        console.log('promise')
+        if (unmounted) return;
+        console.log('----INIT--23424234---'); setMetadata(res); console.log("INIT-----", res)
+      }).catch(e => console.log("ERROR-----",e))
+      return () => {
+        unmounted = true;
+      };
   }, [])
 
   useTrackPlayerEvents(
