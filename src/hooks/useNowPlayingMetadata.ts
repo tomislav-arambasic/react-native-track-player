@@ -13,7 +13,7 @@ export const useNowPlayingMetadata = (): NowPlayingMetadata | undefined => {
     if (unmounted) return;
 
     TrackPlayer.getNowPlayingMetadata()
-    .then()
+    .then(setMetadata)
       .catch(() => {
         /** Only throws while you haven't yet setup, ignore failure. */
       });
