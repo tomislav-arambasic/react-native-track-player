@@ -77,16 +77,13 @@ export async function PlaybackService() {
   });
 
   TrackPlayer.addEventListener(
-    Event.MetadataTimedReceived,
-    async (event) => {
-      const metaInfos = event.metadata[0]?.title?.split(' - ');
-      const artist = metaInfos?.[0]?.trim();
-      const title = metaInfos?.[1]?.trim();
-
-      await TrackPlayer.updateNowPlayingMetadata({
-        artist,
-        title,
-        // artwork: activeTrack?.artwork,
+    Event.PlaybackMetadataReceived,
+    async ({ title, artist }) => {
+      const activeTrack = await TrackPlayer.getActiveTrack();
+      TrackPlayer.updateNowPlayingMetadata({
+        artist: [title, artist].filter(Boolean).join(' - '),
+        title: activeTrack?.title,
+        artwork: activeTrack?.artwork,
       });
     }
   );

@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-
 import { Event } from '../constants';
-
 import { useTrackPlayerEvents } from './useTrackPlayerEvents';
 import { NowPlayingMetadata } from '../interfaces';
 import TrackPlayer from '..';
@@ -30,6 +28,7 @@ export const useNowPlayingMetadata = (): NowPlayingMetadata | undefined => {
   useTrackPlayerEvents(
     [Event.NowPlayingMetadataChanged],
     async (event) => {
+      console.log("event---", event)
       setMetadata(event.metadata);
     }
   );
